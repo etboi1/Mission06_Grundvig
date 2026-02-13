@@ -125,10 +125,8 @@
         <label for="notes" class="form-label">
             Additional Notes
         </label>
-        <input id="notes"
-               class="form-control"
-               type="text"
-               asp-for="Notes" />
+        <textarea id="notes" class="form-control" asp-for="Notes"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-outline-primary">Add Movie</button>
