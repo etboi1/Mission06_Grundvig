@@ -2,6 +2,8 @@
 {
     public class Movie
     {
-        enum 
+        public Rating Rated { get; set; }
+        public bool Edited { get; set; }
+
     }
 }
