@@ -16,6 +16,18 @@ namespace Mission06_Grundvig.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AddMovie()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddMovie()
+        {
+            return View("SubmissionResult");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
