@@ -25,7 +25,10 @@
                 class="form-control" 
                 asp-for="Category"
                 asp-items="Html.GetEnumSelectList<Category>()">
+
+                <option value="">-- Select Category --</option>
         </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
     </div>
 
     <!-- Container for Title input -->
@@ -37,6 +40,7 @@
                class="form-control"
                 type="text"
                 asp-for="Title"/>
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <!-- Container for Year input-->
@@ -48,6 +52,7 @@
                 class="form-control"
                 type="number" 
                 asp-for="Year" />
+        <span asp-validation-for="Year" class="text-danger"></span>
     </div>
 
     <!-- Container for Director Name input -->
@@ -59,6 +64,7 @@
                class="form-control"
                type="text"
                asp-for="Director" />
+        <span asp-validation-for="Director" class="text-danger"></span>
     </div>
 
     <!-- Container for Rating Input-->
@@ -70,7 +76,10 @@
                 class="form-control"
                 asp-for="Rating"
                 asp-items="Html.GetEnumSelectList<Rating>()">
+
+                <option value="">-- Select Rating --</option>
         </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
     </div>
 
     <!-- Container for Edited input -->
@@ -122,7 +131,7 @@
                asp-for="Notes" />
     </div>
 
-    <button type="submit">Add Movie</button>
+    <button type="submit" class="btn btn-outline-primary">Add Movie</button>
 
     </form>
 </div>
