@@ -2,6 +2,7 @@
 {
     public class Movie
     {
+        public int MovieID { get; set; }
         public Category Category { get; set; }
         public string Title { get; set; }
         public int Year { get; set; }
