@@ -23,9 +23,9 @@ namespace Mission06_Grundvig.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMovie()
+        public IActionResult AddMovie(Movie newMovie)
         {
-            return View("SubmissionResult");
+            return View("SubmissionResult", newMovie);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
