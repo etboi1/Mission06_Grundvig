@@ -6,6 +6,11 @@ namespace Mission06_Grundvig.Controllers
 {
     public class HomeController : Controller
     {
+        private JoelMovieCollectionContext _context;
+        public HomeController (JoelMovieCollectionContext movieContext)
+        {
+            _context = movieContext;
+        }
         public IActionResult Index()
         {
             return View();
@@ -25,6 +30,9 @@ namespace Mission06_Grundvig.Controllers
         [HttpPost]
         public IActionResult AddMovie(Movie newMovie)
         {
+            _context.Movies.Add(newMovie);
+            _context.SaveChanges();
+            
             return View("SubmissionResult", newMovie);
         }
 
