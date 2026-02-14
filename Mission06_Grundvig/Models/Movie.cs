@@ -11,6 +11,7 @@ namespace Mission06_Grundvig.Models
         [Required]
         public string Title { get; set; }
         [Required]
+        [Range(1888, 3000, ErrorMessage = "Year must be after 1888.")]
         public int Year { get; set; }
         [Required]
         public string Director { get; set; }
