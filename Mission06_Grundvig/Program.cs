@@ -1,7 +1,16 @@
+using Mission06_Grundvig.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// DB Connection
+builder.Services.AddDbContext<JoelMovieCollectionContext>(options =>
+{
+    options.UseSqlite(builder.Configuration["ConnectionStrings:SQLiteConnection"]);
+});
 
 var app = builder.Build();
 

@@ -4,6 +4,7 @@ namespace Mission06_Grundvig.Models
 {
     public class Movie
     {
+        [Key]
         public int MovieID { get; set; }
         [Required]
         public Category? Category { get; set; }
