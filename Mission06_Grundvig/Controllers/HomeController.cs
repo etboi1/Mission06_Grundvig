@@ -30,6 +30,12 @@ namespace Mission06_Grundvig.Controllers
         [HttpPost]
         public IActionResult AddMovie(Movie newMovie)
         {
+            if (!ModelState.IsValid)
+            {
+                // redisplay the form with errors
+                return View();
+            }
+
             _context.Movies.Add(newMovie);
             _context.SaveChanges();
             
