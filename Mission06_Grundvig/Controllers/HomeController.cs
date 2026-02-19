@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mission06_Grundvig.Models;
+using Mission06_Grundvig.Models.ViewModels;
 using System.Diagnostics;
 
 namespace Mission06_Grundvig.Controllers
@@ -25,10 +26,13 @@ namespace Mission06_Grundvig.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            ViewBag.Categories = _context.Categories
-                .ToList();
+            MovieFormViewModel vm = new MovieFormViewModel
+            {
+                Movie = new Movie(),
+                Categories = _context.Categories.ToList()
+            };
             
-            return View();
+            return View(vm);
         }
 
         [HttpPost]
@@ -59,6 +63,37 @@ namespace Mission06_Grundvig.Controllers
                 );
 
             return View(groupedMovies);
+        }
+
+        [HttpGet]
+        public IActionResult EditMovie(int id)
+        {
+            Movie movieToEdit = _context.Movies
+                .Include(m => m.Category)
+                .Single(m => m.MovieId == id);
+
+            MovieFormViewModel vm = new MovieFormViewModel
+            {
+                Movie = movieToEdit,
+                Categories = _context.Categories.ToList()
+            };
+            
+            return View("AddMovie", vm);
+        }
+
+        [HttpPost]
+        public IActionResult EditMovie(int id, Movie editedMovie)
+        {
+            _context.Update(editedMovie);
+            _context.SaveChanges();
+            
+            return RedirectToAction("ViewMovies");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteMovie(int id)
+        {
+            return RedirectToAction("ViewMovies");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

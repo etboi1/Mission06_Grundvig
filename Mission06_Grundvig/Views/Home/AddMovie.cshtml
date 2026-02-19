@@ -2,33 +2,38 @@
     ViewData["Title"] = "Add Movie";
 }
 
-@model Movie
+@model MovieFormViewModel
 
 <!-- Formatting is using classes from bootstrap-->
 <!--Outer container-->
 <div class="container mt-5" style="max-width: 500px;">
-    <h1 class="mb-3">Add a Movie</h1>
+    <h1 class="mb-3">@(Model.Movie.MovieId == 0 ? "Add Movie" : "Edit Movie")</h1>
 
     <p class="text-muted">
-        Please enter the information for the new movie below.
+        @(Model.Movie.MovieId == 0 ? "Please enter the information for the new movie below." : $"Please make the desired edits for the movie below.")
     </p>
 
     <!-- Begin Form-->
     <form method="post">
+
+    <input type="hidden" asp-for="Movie.MovieId"/>
 
     <!-- Container for Category Input-->
     <div class="mb-3">
         <label for="category" class="form-label">
             Category
         </label>
-        <select asp-for="CategoryId" class="form-control">
-            <option value="">-- Select Category --</option>
-            @foreach (var cat in ViewBag.Categories)
+        <select asp-for="Movie.CategoryId" class="form-control">
+            @if (Model.Movie.CategoryId == 0)
+            {
+                <option value="">-- Select Category --</option>
+            }
+            @foreach (var cat in Model.Categories)
             {
                 <option value="@cat.CategoryId">@cat.CategoryName</option>
             }
         </select>
-        <span asp-validation-for="Category" class="text-danger"></span>
+        <span asp-validation-for="Movie.Category" class="text-danger"></span>
     </div>
 
     <!-- Container for Title input -->
@@ -39,8 +44,8 @@
         <input id="title"
                class="form-control"
                 type="text"
-                asp-for="Title"/>
-        <span asp-validation-for="Title" class="text-danger"></span>
+                asp-for="Movie.Title"/>
+        <span asp-validation-for="Movie.Title" class="text-danger"></span>
     </div>
 
     <!-- Container for Year input-->
@@ -51,8 +56,8 @@
         <input id="year"
                 class="form-control"
                 type="number" 
-                asp-for="Year" />
-        <span asp-validation-for="Year" class="text-danger"></span>
+                asp-for="Movie.Year" />
+        <span asp-validation-for="Movie.Year" class="text-danger"></span>
     </div>
 
     <!-- Container for Director Name input -->
@@ -63,8 +68,8 @@
         <input id="director"
                class="form-control"
                type="text"
-               asp-for="Director" />
-        <span asp-validation-for="Director" class="text-danger"></span>
+               asp-for="Movie.Director" />
+        <span asp-validation-for="Movie.Director" class="text-danger"></span>
     </div>
 
     <!-- Container for Rating Input-->
@@ -74,12 +79,14 @@
         </label>
         <select id="rating"
                 class="form-control"
-                asp-for="Rating"
-                asp-items="Html.GetEnumSelectList<Rating>()">
-
-                <option value="">-- Select Rating --</option>
+                asp-for="Movie.Rating"
+                asp-items="Html.GetEnumSelectList<Rating>()">             
+            @if (Model.Movie.MovieId == 0)
+            {
+                <option value="">-- Select Rating --</option>                           
+            }
         </select>
-        <span asp-validation-for="Rating" class="text-danger"></span>
+        <span asp-validation-for="Movie.Rating" class="text-danger"></span>
     </div>
 
     <!-- Container for Edited input -->
@@ -89,7 +96,7 @@
         <div class="form-check">
             <input class="form-check-input"
                    type="radio"
-                   asp-for="Edited"
+                   asp-for="Movie.Edited"
                    value="true"
                    id="editedYes" />
             <label class="form-check-label" for="editedYes">
@@ -100,7 +107,7 @@
         <div class="form-check">
             <input class="form-check-input"
                    type="radio"
-                   asp-for="Edited"
+                   asp-for="Movie.Edited"
                    value="false"
                    id="editedNo" />
             <label class="form-check-label" for="editedNo">
@@ -117,7 +124,7 @@
         <input id="lent-to"
                class="form-control"
                type="text"
-               asp-for="LentTo" />
+               asp-for="Movie.LentTo" />
     </div>
 
     <!-- Container for Notes input -->
@@ -125,11 +132,11 @@
         <label for="notes" class="form-label">
             Additional Notes
         </label>
-        <textarea id="notes" class="form-control" asp-for="Notes"></textarea>
-        <span asp-validation-for="Notes" class="text-danger"></span>
+        <textarea id="notes" class="form-control" asp-for="Movie.Notes"></textarea>
+        <span asp-validation-for="Movie.Notes" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-outline-primary">Add Movie</button>
+    <button type="submit" class="btn btn-outline-primary">@(Model.Movie.MovieId == 0 ? "Add Movie" : "Save Edits")</button>
 
     </form>
 </div>
