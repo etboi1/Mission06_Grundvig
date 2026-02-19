@@ -4,72 +4,100 @@
 @{
 }
 
-@model List<Movie>
+@model Dictionary<string, List<Movie>>
 
-<!-- Outer container for holding the movie cards -->
+<!-- Outer container for holding accordian and cards-->
 <div class="container mt-4">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        
-        <!-- Make and display a card for each movie -->
-        @foreach (Movie movie in Model)
+    <!-- Accordion (each expander is a category type of movies) -->
+    <div class="accordion" id="movieAccordion">
+
+        @foreach (var categoryGroup in Model)
         {
-            <!-- Movie Card -->
-            <div class="col">
-                <div class="card h-100 shadow-sm">
+            <!-- Generate accordian id from category name -->
+            var categoryId = categoryGroup.Key.Replace(" ", "");
 
-                    <div class="card-header bg-primary text-white">
-                        <strong>@movie.Category.CategoryName</strong>
-                    </div>
+            <!-- Generate an accordion item for each category -->
+            <div class="accordion-item">
 
-                    <div class="card-body">
+                <!-- Category Header -->
+                <h2 class="accordion-header" id="heading-@categoryId">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse-@categoryId">
+                        @categoryGroup.Key
+                    </button>
+                </h2>
 
-                        <h5 class="card-title mb-1">@movie.Title</h5>
+                <!-- Expandable Body -->
+                <div id="collapse-@categoryId"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#movieAccordion">
 
-                        <p class="text-muted mb-2">
-                            @movie.Year • Rated @movie.Rating
-                        </p>
+                    <div class="accordion-body">
 
-                        @if (movie.Director != null)
-                        {
-                            <p class="mb-1">
-                                <strong>Director:</strong> @movie.Director
-                            </p>
-                        }
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-                        @if (movie.Edited != null)
-                        {
-                            <p class="mb-1">
-                                <strong>Edited:</strong>
-                                @if (movie.Edited == true)
-                                {
-                                    <span class="badge bg-warning text-dark">Yes</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-success">No</span>
-                                }
-                            </p>
-                        }
+                            <!-- Populate the body with alphabetically organized movie cards -->
+                            @foreach (var movie in categoryGroup.Value)
+                            {
+                                <div class="col">
+                                    <!-- The card -->
+                                    <div class="card h-100 shadow-sm">
 
-                        @if (movie.LentTo != null)
-                        {
-                            <p class="mb-1">
-                                <strong>Lent To:</strong> @movie.LentTo
-                            </p>
-                        }
+                                        <div class="card-body">
 
-                        @if (movie.Notes != null)
-                        {
-                            <p class="mt-2">
-                                <strong>Notes:</strong><br />
-                                <small class="text-muted">@movie.Notes</small>
-                            </p>
-                        }
+                                            <h5 class="card-title mb-1">@movie.Title</h5>
+
+                                            <p class="text-muted mb-2">
+                                                @movie.Year • Rated @movie.Rating
+                                            </p>
+
+                                            @if (movie.Director != null)
+                                            {
+                                                <p class="mb-1">
+                                                    <strong>Director:</strong> @movie.Director
+                                                </p>
+                                            }
+
+                                            <p class="mb-1">
+                                                <strong>Edited:</strong>
+                                                @if (movie.Edited == true)
+                                                {
+                                                    <span class="badge bg-warning text-dark">Yes</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-success">No</span>
+                                                }
+                                            </p>
+
+                                            @if (movie.LentTo != null)
+                                            {
+                                                <p class="mb-1">
+                                                    <strong>Lent To:</strong> @movie.LentTo
+                                                </p>
+                                            }
+
+                                            @if (movie.Notes != null)
+                                            {
+                                                <p class="mt-2">
+                                                    <strong>Notes:</strong><br />
+                                                    <small class="text-muted">@movie.Notes</small>
+                                                </p>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
 
                     </div>
                 </div>
+
             </div>
         }
-
     </div>
 </div>

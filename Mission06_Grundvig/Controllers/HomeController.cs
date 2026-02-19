@@ -48,11 +48,17 @@ namespace Mission06_Grundvig.Controllers
 
         public IActionResult ViewMovies()
         {
-            var movies = _context.Movies
-                .Include(x => x.Category)
-                .OrderBy(x => x.Title).ToList();
-            
-            return View(movies);
+            var groupedMovies = _context.Movies
+                .Include(m => m.Category)
+                .AsEnumerable() // AI says this ensures SQL handles joins, C# handles grouping + dictionary conversion, and avoids weird translation edge cases later.
+                .GroupBy(m => m.Category.CategoryName)
+                .OrderBy(g => g.Key)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.OrderBy(m => m.Title).ToList()
+                );
+
+            return View(groupedMovies);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
