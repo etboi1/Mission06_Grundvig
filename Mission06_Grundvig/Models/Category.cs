@@ -2,17 +2,11 @@
 
 namespace Mission06_Grundvig.Models
 {
-    public enum Category
+    public class Category
     {
-        Miscellaneous = 1,
-        Drama,
-        Telivision,
-        [Display(Name = "Horror/Suspense")]
-        HorrorSuspense,
-        Comedy,
-        Family,
-        [Display(Name = "Action/Adventure")]
-        ActionAdventure,
-        VHS
+        [Key]
+        public int CategoryId { get; set; }
+        [Required]
+        public string CategoryName { get; set; }
     }
 }

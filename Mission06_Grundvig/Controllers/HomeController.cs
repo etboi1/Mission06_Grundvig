@@ -24,6 +24,9 @@ namespace Mission06_Grundvig.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewBag.Categories = _context.Categories
+                .ToList();
+            
             return View();
         }
 
