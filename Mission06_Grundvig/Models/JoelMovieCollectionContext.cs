@@ -17,7 +17,6 @@ namespace Mission06_Grundvig.Models
                 );
         }
 
-
         public JoelMovieCollectionContext(DbContextOptions<JoelMovieCollectionContext> options) :base (options) { }
 
         public DbSet<Movie> Movies { get; set; }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission06_Grundvig.Models;
 using System.Diagnostics;
 
@@ -48,7 +49,8 @@ namespace Mission06_Grundvig.Controllers
         public IActionResult ViewMovies()
         {
             var movies = _context.Movies
-                            .OrderBy(x => x.Title).ToList();
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title).ToList();
             
             return View(movies);
         }
