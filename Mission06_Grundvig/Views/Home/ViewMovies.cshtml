@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Movie>
+
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        
+        <!-- Make and display a card for each movie -->
+        @foreach (Movie movie in Model)
+        {
+            <!-- Movie Card -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-header bg-primary text-white">
+                        <strong>@movie.Category</strong>
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="card-title mb-1">@movie.Title</h5>
+
+                        <p class="text-muted mb-2">
+                            @movie.Year • Rated @movie.Rating
+                        </p>
+
+                        @if (movie.Director != null)
+                        {
+                            <p class="mb-1">
+                                <strong>Director:</strong> @movie.Director
+                            </p>
+                        }
+
+                        @if (movie.Edited != null)
+                        {
+                            <p class="mb-1">
+                                <strong>Edited:</strong>
+                                @if (movie.Edited == true)
+                                {
+                                    <span class="badge bg-warning text-dark">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">No</span>
+                                }
+                            </p>
+                        }
+
+                        @if (movie.LentTo != null)
+                        {
+                            <p class="mb-1">
+                                <strong>Lent To:</strong> @movie.LentTo
+                            </p>
+                        }
+
+                        @if (movie.Notes != null)
+                        {
+                            <p class="mt-2">
+                                <strong>Notes:</strong><br />
+                                <small class="text-muted">@movie.Notes</small>
+                            </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

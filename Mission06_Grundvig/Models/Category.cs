@@ -4,15 +4,15 @@ namespace Mission06_Grundvig.Models
 {
     public enum Category
     {
-        [Display(Name = "Action/Adventure")]
-        ActionAdventure,
-        Comedy,
+        Miscellaneous = 1,
         Drama,
-        Family,
+        Telivision,
         [Display(Name = "Horror/Suspense")]
         HorrorSuspense,
-        Miscellaneous,
-        Telivision,
+        Comedy,
+        Family,
+        [Display(Name = "Action/Adventure")]
+        ActionAdventure,
         VHS
     }
 }
