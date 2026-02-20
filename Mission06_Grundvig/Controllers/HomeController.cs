@@ -82,8 +82,10 @@ namespace Mission06_Grundvig.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditMovie(int id, Movie editedMovie)
+        public IActionResult EditMovie(MovieFormViewModel vm)
         {
+            Movie editedMovie = vm.Movie;
+
             _context.Update(editedMovie);
             _context.SaveChanges();
             

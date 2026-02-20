@@ -23,7 +23,7 @@ namespace Mission06_Grundvig.Models
         public bool Edited { get; set; }
         public string? LentTo { get; set; }
         [Required]
-        public string CopiedToPlex { get; set; }
+        public bool CopiedToPlex { get; set; }
         [StringLength(25, ErrorMessage = "Notes cannot exceed 25 characters.")]
         public string? Notes { get; set; }
     }

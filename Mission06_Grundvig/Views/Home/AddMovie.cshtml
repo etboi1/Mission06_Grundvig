@@ -127,6 +127,33 @@
                asp-for="Movie.LentTo" />
     </div>
 
+    <!-- Container for CopiedtoPlex input -->
+    <div class="mb-3">
+        <label class="form-label">Has this movie been copied to the Plex Server?</label>
+
+        <div class="form-check">
+            <input class="form-check-input"
+                    type="radio"
+                    asp-for="Movie.CopiedToPlex"
+                    value="true"
+                    id="editedYes" />
+            <label class="form-check-label" for="editedYes">
+                Yes
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input"
+                    type="radio"
+                    asp-for="Movie.CopiedToPlex"
+                    value="false"
+                    id="editedNo" />
+            <label class="form-check-label" for="editedNo">
+                No
+            </label>
+        </div>
+    </div>
+
     <!-- Container for Notes input -->
     <div class="mb-3">
         <label for="notes" class="form-label">
