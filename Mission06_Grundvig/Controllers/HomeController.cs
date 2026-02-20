@@ -36,18 +36,27 @@ namespace Mission06_Grundvig.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMovie(Movie newMovie)
+        public IActionResult AddMovie(MovieFormViewModel vm)
         {
             if (!ModelState.IsValid)
             {
+                foreach (var entry in ModelState)
+                {
+                    foreach (var error in entry.Value.Errors)
+                    {
+                        Console.WriteLine($"{entry.Key}: {error.ErrorMessage}");
+                    }
+                }
+
                 // redisplay the form with errors
-                return View();
+                vm.Categories = _context.Categories.ToList();
+                return View(vm);
             }
 
-            _context.Movies.Add(newMovie);
+            _context.Movies.Add(vm.Movie);
             _context.SaveChanges();
             
-            return View("SubmissionResult", newMovie);
+            return View("SubmissionResult", vm.Movie);
         }
 
         public IActionResult ViewMovies()
@@ -95,6 +104,12 @@ namespace Mission06_Grundvig.Controllers
         [HttpPost]
         public IActionResult DeleteMovie(int id)
         {
+            Movie movieToDelete = _context.Movies
+                .Single(m => m.MovieId == id);
+
+            _context.Movies.Remove(movieToDelete);
+            _context.SaveChanges();
+            
             return RedirectToAction("ViewMovies");
         }
 

@@ -33,7 +33,7 @@
                 <option value="@cat.CategoryId">@cat.CategoryName</option>
             }
         </select>
-        <span asp-validation-for="Movie.Category" class="text-danger"></span>
+        <span asp-validation-for="Movie.CategoryId" class="text-danger"></span>
     </div>
 
     <!-- Container for Title input -->
@@ -114,6 +114,8 @@
                 No
             </label>
         </div>
+
+        <span asp-validation-for="Movie.Edited" class="text-danger"></span>
     </div>
 
     <!-- Container for LentTo input -->
@@ -136,7 +138,7 @@
                     type="radio"
                     asp-for="Movie.CopiedToPlex"
                     value="true"
-                    id="editedYes" />
+                    id="copiedToPlexYes" />
             <label class="form-check-label" for="editedYes">
                 Yes
             </label>
@@ -147,11 +149,13 @@
                     type="radio"
                     asp-for="Movie.CopiedToPlex"
                     value="false"
-                    id="editedNo" />
+                    id="copiedToPlexNo" />
             <label class="form-check-label" for="editedNo">
                 No
             </label>
         </div>
+
+        <span asp-validation-for="Movie.CopiedToPlex" class="text-danger"></span>
     </div>
 
     <!-- Container for Notes input -->
