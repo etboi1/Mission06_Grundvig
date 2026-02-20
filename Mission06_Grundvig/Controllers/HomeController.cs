@@ -13,16 +13,23 @@ namespace Mission06_Grundvig.Controllers
         {
             _context = movieContext;
         }
+
+        // Home page
         public IActionResult Index()
         {
             return View();
         }
 
+        // About Joel page
         public IActionResult MeetJoel()
         {
             return View();
         }
 
+        // Get route for adding movies (retrieves and correctly populates the add movie page)
+        // Note that from research into best-practices, I found the ViewBag is not the best-practice
+        // way to pass information back to the frontend in most cases. Rather, a model is supposed to 
+        // be used to encapsulate all the information needed for a specific view.
         [HttpGet]
         public IActionResult AddMovie()
         {
@@ -35,19 +42,12 @@ namespace Mission06_Grundvig.Controllers
             return View(vm);
         }
 
+        // Post route for adding movies
         [HttpPost]
         public IActionResult AddMovie(MovieFormViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                foreach (var entry in ModelState)
-                {
-                    foreach (var error in entry.Value.Errors)
-                    {
-                        Console.WriteLine($"{entry.Key}: {error.ErrorMessage}");
-                    }
-                }
-
                 // redisplay the form with errors
                 vm.Categories = _context.Categories.ToList();
                 return View(vm);
@@ -59,6 +59,7 @@ namespace Mission06_Grundvig.Controllers
             return View("SubmissionResult", vm.Movie);
         }
 
+        // Get Route for viewing movies
         public IActionResult ViewMovies()
         {
             var groupedMovies = _context.Movies
@@ -74,6 +75,7 @@ namespace Mission06_Grundvig.Controllers
             return View(groupedMovies);
         }
 
+        // Get route for editing movies - displays edit page and prepopulates it with the correct movie
         [HttpGet]
         public IActionResult EditMovie(int id)
         {
@@ -90,6 +92,7 @@ namespace Mission06_Grundvig.Controllers
             return View("AddMovie", vm);
         }
 
+        // Post route for editing movies
         [HttpPost]
         public IActionResult EditMovie(MovieFormViewModel vm)
         {
@@ -101,6 +104,7 @@ namespace Mission06_Grundvig.Controllers
             return RedirectToAction("ViewMovies");
         }
 
+        // Route for deleting movies - returns back to the view movies page
         [HttpPost]
         public IActionResult DeleteMovie(int id)
         {

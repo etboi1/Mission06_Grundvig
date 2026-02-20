@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Add Movie";
+    ViewData["Title"] = Model.Movie.MovieId == 0 ? "Add Movie" : "Edit Movie";
 }
 
 @model MovieFormViewModel
@@ -10,7 +10,7 @@
     <h1 class="mb-3">@(Model.Movie.MovieId == 0 ? "Add Movie" : "Edit Movie")</h1>
 
     <p class="text-muted">
-        @(Model.Movie.MovieId == 0 ? "Please enter the information for the new movie below." : $"Please make the desired edits for the movie below.")
+        @(Model.Movie.MovieId == 0 ? "Please enter the information for the new movie below." : "Please make the desired edits for the movie below.")
     </p>
 
     <!-- Begin Form-->

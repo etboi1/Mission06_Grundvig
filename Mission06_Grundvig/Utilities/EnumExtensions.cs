@@ -7,7 +7,7 @@ using System.Reflection;
 // but also store the rating string to the database rather than an int
 public static class EnumExtensions
 {
-    // Helper function for extracting the display name from the enum value for storage in db
+    // Helper function for extracting the display name (string) from the enum value for storage in db
     public static string GetDisplayName(this Enum enumValue)
     {
         var member = enumValue.GetType()

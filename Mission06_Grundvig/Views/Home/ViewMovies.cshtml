@@ -49,10 +49,12 @@
 
                                             <h5 class="card-title mb-1">@movie.Title</h5>
 
+                                            <!-- All info on the movie is displayed from here down -->
                                             <p class="text-muted mb-2">
                                                 @movie.Year • Rated @movie.Rating
                                             </p>
 
+                                            <!-- All the if statements are jsut ensuring the field isn't null -->
                                             @if (movie.Director != null)
                                             {
                                                 <p class="mb-1">
@@ -63,6 +65,18 @@
                                             <p class="mb-1">
                                                 <strong>Edited:</strong>
                                                 @if (movie.Edited == true)
+                                                {
+                                                    <span class="badge bg-warning text-dark">Yes</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-success">No</span>
+                                                }
+                                            </p>
+
+                                            <p class="mb-1">
+                                                <strong>Copied to Plex:</strong>
+                                                @if (movie.CopiedToPlex == true)
                                                 {
                                                     <span class="badge bg-warning text-dark">Yes</span>
                                                 }
